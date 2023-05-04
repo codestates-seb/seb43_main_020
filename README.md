@@ -13,6 +13,10 @@
 9. 병합 후 원격 저장소에 push 한다.
 10. 원격 저장소에서 pull request를 생성한다.
 
+### git pull 오류 시
+
+- 프로젝트 최상단 폴더에서 `git config pull.rebase false`
+
 ### 색상
 
 - 파란색 색상코드: #408EF1
