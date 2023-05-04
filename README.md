@@ -8,7 +8,7 @@
 4. origin 밖에 없을 경우 팀 레포지토리를 추가하여야 한다.
 5. `git remote add upstream https://github.com/codestates-seb/seb43_main_020.git`로 팀 레포지토리를 리모트 레포지토리에 추가한다.
 6. `git remote -v`로 팀 레포지토리가 리모트 레포지토리로 지정되었는지 확인한다.
-7. 팀 레포지토리 frontend 브랜치의 변경 사항을 가져오기 `git remote upstream frontend`를 입력한다.
+7. 팀 레포지토리 frontend 브랜치의 변경 사항을 가져오기 `git pull upstream frontend`를 입력한다.
 8. 충돌하는 부분이 있다면 수동으로 병합한다.
 9. 병합 후 원격 저장소에 push 한다.
 10. 원격 저장소에서 pull request를 생성한다.
