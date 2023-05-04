@@ -12,6 +12,7 @@ const HeaderContainer = styled.header`
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid #d3d3d3;
+  margin-bottom: 10px;
 
   .header-container {
     width: 1264px;
