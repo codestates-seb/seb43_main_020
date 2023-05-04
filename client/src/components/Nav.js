@@ -2,11 +2,12 @@ import styled from "styled-components"
 import { useState } from "react"
 
 const NavWrapper = styled.div`
+  padding-top: 50px;
   border-top: 1px solid #DCDCDC;
   border-bottom: 1px solid #DCDCDC;
   display: flex;
   justify-content: space-around;
-
+  
   .nav--button {
     height: 30px;
     border: 2px solid #DCDCDC;
@@ -14,7 +15,6 @@ const NavWrapper = styled.div`
     margin-bottom: 5px;
     border-radius: 10px;
     text-align: center;
-    line-height: 30px;
     cursor: pointer;
     background-color: white;
   }
