@@ -19,6 +19,7 @@ function App() {
   let navigate = useNavigate();
   return (
     <Routes>
+      <Route path="/" element={<Board />}></Route>
       <Route path="/Write" element={<Write />}></Route>
     </Routes>
   );
