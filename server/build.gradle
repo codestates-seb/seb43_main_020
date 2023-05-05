@@ -22,23 +22,35 @@ configurations {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
 	asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 //	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.data:spring-data-rest-hal-explorer'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 //	testImplementation 'org.springframework.security:spring-security-test'
+
+	// QueryDSL 설정
+	implementation "com.querydsl:querydsl-jpa"
+	implementation "com.querydsl:querydsl-core"
+	implementation "com.querydsl:querydsl-collections"
+	// dependency 마지막에 버전정보는 생략가능하나 해당 정보는 가운데 버전정보가 들어가기에 아래처럼 표현함
+	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
+	annotationProcessor "jakarta.annotation:jakarta.annotation-api" // NoClassDefFoundError 대응 코드
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api" // NoClassDefFoundError 대응 코드
+
 	implementation 'org.mapstruct:mapstruct:1.5.1.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.1.Final'
 	implementation 'com.google.code.gson:gson'
-//	runtimeOnly 'mysql:mysql-connector-java'
-
 }
 
 tasks.named('test') {
@@ -71,4 +83,26 @@ bootJar {
 		into 'static/docs'
 	}
 
+}
+
+
+// Querydsl 설정
+// main 디렉토리 아래 generated 폴더 생성
+// gradle build를 하면 build 폴더 하위에 생성, 후에 intelliJ build를 했을때 같은 경로에 같은 파일이 겹쳐 에러가 발생하는
+// 것을 방지하기 위해 main 아래에 생성되도록 설정
+def generated = 'src/main/generated'
+
+// querydsl QClass 파일 생성 위치 설정
+tasks.withType(JavaCompile).configureEach {
+	options.getGeneratedSourceOutputDirectory().set(file(generated))
+}
+
+// java source set에 QClass 위치 추가
+sourceSets {
+	main.java.srcDirs += [generated]
+}
+
+// gradle clean 시 해당 폴더 삭제
+clean {
+	delete file(generated)
 }
