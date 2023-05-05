@@ -54,13 +54,13 @@ tasks.named('test') {
 def generated = 'src/main/generated'
 
 // querydsl QClass 파일 생성 위치 설정
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
 	options.getGeneratedSourceOutputDirectory().set(file(generated))
 }
 
 // java source set에 QClass 위치 추가
 sourceSets {
-	main.java.srcDirs += [ generated ]
+	main.java.srcDirs += [generated]
 }
 
 // gradle clean 시 해당 폴더 삭제
