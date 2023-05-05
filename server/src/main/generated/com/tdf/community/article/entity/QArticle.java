@@ -18,6 +18,8 @@ public class QArticle extends EntityPathBase<Article> {
 
     private static final long serialVersionUID = -351685459L;
 
+    private static final PathInits INITS = PathInits.DIRECT2;
+
     public static final QArticle article = new QArticle("article");
 
     public final com.tdf.community.audit.QAuditingFields _super = new com.tdf.community.audit.QAuditingFields(this);
@@ -36,6 +38,8 @@ public class QArticle extends EntityPathBase<Article> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final com.tdf.community.member.entity.QMember member;
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifiedAt = _super.modifiedAt;
 
@@ -45,15 +49,24 @@ public class QArticle extends EntityPathBase<Article> {
     public final StringPath title = createString("title");
 
     public QArticle(String variable) {
-        super(Article.class, forVariable(variable));
+        this(Article.class, forVariable(variable), INITS);
     }
 
     public QArticle(Path<? extends Article> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QArticle(PathMetadata metadata) {
-        super(Article.class, metadata);
+        this(metadata, PathInits.getFor(metadata, INITS));
+    }
+
+    public QArticle(PathMetadata metadata, PathInits inits) {
+        this(Article.class, metadata, inits);
+    }
+
+    public QArticle(Class<? extends Article> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.member = inits.isInitialized("member") ? new com.tdf.community.member.entity.QMember(forProperty("member")) : null;
     }
 
 }

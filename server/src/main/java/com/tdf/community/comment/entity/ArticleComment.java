@@ -3,6 +3,7 @@ package com.tdf.community.comment.entity;
 
 import com.tdf.community.article.entity.Article;
 import com.tdf.community.audit.AuditingFields;
+import com.tdf.community.member.entity.Member;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -38,7 +39,7 @@ public class ArticleComment extends AuditingFields {
     }
 
     public static ArticleComment of(Article article, Member member, String content) {
-        return new ArticleComment(article, mbmer, content);
+        return new ArticleComment(article, member, content);
     }
 
     @Override

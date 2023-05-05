@@ -36,6 +36,8 @@ public class QArticleComment extends EntityPathBase<ArticleComment> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final com.tdf.community.member.entity.QMember member;
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifiedAt = _super.modifiedAt;
 
@@ -60,7 +62,8 @@ public class QArticleComment extends EntityPathBase<ArticleComment> {
 
     public QArticleComment(Class<? extends ArticleComment> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.article = inits.isInitialized("article") ? new com.tdf.community.article.entity.QArticle(forProperty("article")) : null;
+        this.article = inits.isInitialized("article") ? new com.tdf.community.article.entity.QArticle(forProperty("article"), inits.get("article")) : null;
+        this.member = inits.isInitialized("member") ? new com.tdf.community.member.entity.QMember(forProperty("member")) : null;
     }
 
 }

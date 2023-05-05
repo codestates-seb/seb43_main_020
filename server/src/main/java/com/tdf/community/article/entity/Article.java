@@ -2,6 +2,7 @@ package com.tdf.community.article.entity;
 
 import com.tdf.community.audit.AuditingFields;
 import com.tdf.community.comment.entity.ArticleComment;
+import com.tdf.community.member.entity.Member;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -45,7 +46,7 @@ public class Article extends AuditingFields {
         this.hashtag = hashtag;
     }
 
-    public static Article of(Member, memberString title, String content, String hashtag) {
+    public static Article of(Member member, String title, String content, String hashtag) {
         return new Article(member, title, content, hashtag);
     }
 

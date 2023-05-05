@@ -1,6 +1,8 @@
 package com.tdf.community.member.entity;
 
 
+import com.tdf.community.article.entity.Article;
+import com.tdf.community.comment.entity.ArticleComment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +11,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Setter
@@ -40,6 +44,14 @@ public class Member {
     @Enumerated(value = EnumType.STRING)
     @Column(length =20,nullable = false)
     private MemberStatus memberStatus =MemberStatus.MEMBER_JOIN;
+
+    @OrderBy("createdAt DESC")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Article> articles = new ArrayList<>();
+
+    @OrderBy("createdAt DESC")
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<ArticleComment> articleComments = new ArrayList<>();
 
 //    private List<String> roles = new ArrayList<>();
 
