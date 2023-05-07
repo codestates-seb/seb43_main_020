@@ -10,6 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public class MemberDto {
     @Getter
@@ -80,7 +81,7 @@ public class MemberDto {
         private String address;
         private Member.MemberStatus memberStatus;
 
-        private LocalDateTime created_At;
+        private ZonedDateTime created_At;
 
   //    private LocalDateTime deleted_At
 

@@ -10,9 +10,8 @@ import java.util.List;
 public interface MemberMapper {
 
     Member memberPostDtoToMember(MemberDto.Post requestBody);
-
     Member memberPatchDtoToMember(MemberDto.Patch requestBody);
+    Member memberResponseDtoToMember(MemberDto.Response requestBody);
     MemberDto.Response memberToMemberResponseDto(Member member);
-
     List<MemberDto.Response> membersTomemberResponseDtos(List<Member> findMembers);
 }

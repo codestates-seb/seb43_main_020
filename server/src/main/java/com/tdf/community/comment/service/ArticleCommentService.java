@@ -2,7 +2,6 @@ package com.tdf.community.comment.service;
 
 import com.tdf.community.article.repository.ArticleRepository;
 import com.tdf.community.comment.dto.ArticleCommentDto;
-import com.tdf.community.comment.dto.ArticleCommentUpdateDto;
 import com.tdf.community.comment.repository.ArticleCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,9 +25,9 @@ public class ArticleCommentService {
     public void saveComment(ArticleCommentDto dto) {
     }
 
-    public void updateComment(long l, ArticleCommentUpdateDto dto) {
+    public void updateComment(ArticleCommentDto dto) {
     }
 
-    public void deleteComment(long l) {
+    public void deleteComment(long commentId) {
     }
 }

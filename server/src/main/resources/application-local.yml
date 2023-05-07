@@ -1,3 +1,12 @@
+debug: false # ?? ???? ?? ??? ???? ?
+management.endpoints.web.exposure.include: "*" # Spring Boot Actuator Endpoints ? ????? ????? ???? ??
+
+logging:
+  level:
+    com.tdf.community: debug # community ????? ??? ??
+    org.springframework.web.servlet: debug # ?? debug ??? ? ?? Request, Response ??? ?
+    org.hibernate.type.descriptor.sql.BasicBinder: trace # JPA? ?? ??? ?? -> ????? ?? ???? ??
+
 spring:
   h2:
     console:
@@ -19,8 +28,12 @@ spring:
         highlight_sql: true
         color-codes: true
         use_sql_comments: true
+        default_batch_fetch_size: 100
     defer-datasource-initialization: true
   servlet:
     multipart:
       max-file-size: 4MB
       max-request-size: 4MB
+  data.rest:
+    base-path: /api
+    detection-strategy: annotated
