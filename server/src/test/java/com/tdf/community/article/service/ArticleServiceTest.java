@@ -5,11 +5,12 @@ import com.tdf.community.article.dto.ArticleWithCommentsDto;
 import com.tdf.community.article.entity.Article;
 import com.tdf.community.article.repository.ArticleRepository;
 import com.tdf.community.article.type.SearchType;
-import com.tdf.community.member.dto.MemberDto;
 import com.tdf.community.member.entity.Member;
+import com.tdf.community.member.mapper.MemberMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mapstruct.factory.Mappers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -18,7 +19,6 @@ import org.springframework.data.domain.Pageable;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,10 +30,10 @@ import static org.mockito.BDDMockito.*;
 @ExtendWith(MockitoExtension.class)
 class ArticleServiceTest {
     @InjectMocks private ArticleService sut;
-
     @Mock private ArticleRepository articleRepository;
+    private MemberMapper memberMapper = Mappers.getMapper(MemberMapper.class);
 
-    @DisplayName("검색어 없이 게시글을 검색하면, 게시글 페이지를 반환한다.")
+    @DisplayName("검색어 없이 게시글을 검색하면, 기본 설정의 게시글을 반환한다.")
     @Test
     void givenNoSearchParameters_whenSearchingArticles_thenReturnsArticlePage() {
         // Given
@@ -55,14 +55,14 @@ class ArticleServiceTest {
         SearchType searchType = SearchType.TITLE;
         String searchKeyword = "title";
         Pageable pageable = Pageable.ofSize(20);
-        given(articleRepository.findByTitle(searchKeyword, pageable)).willReturn(Page.empty());
+        given(articleRepository.findByTitleContaining(searchKeyword, pageable)).willReturn(Page.empty());
 
         // When
         Page<ArticleDto> articles = sut.searchArticles(searchType, searchKeyword, pageable);
 
         // Then
         assertThat(articles).isEmpty();
-        then(articleRepository).should().findByTitle(searchKeyword, pageable);
+        then(articleRepository).should().findByTitleContaining(searchKeyword, pageable);
     }
 
     @DisplayName("게시글을 조회하면, 게시글을 반환한다.")
@@ -97,7 +97,7 @@ class ArticleServiceTest {
         // Then
         assertThat(t)
                 .isInstanceOf(EntityNotFoundException.class)
-                .hasMessage("게시글이 없습니다 - articleId: " + articleId);
+                .hasMessage("게시글이 없습니다.");
         then(articleRepository).should().findById(articleId);
     }
 
@@ -107,7 +107,6 @@ class ArticleServiceTest {
         // Given
         ArticleDto dto = createArticleDto();
         given(articleRepository.save(any(Article.class))).willReturn(createArticle());
-
         // When
         sut.saveArticle(dto);
 
@@ -169,6 +168,7 @@ class ArticleServiceTest {
         member.setEmail("test@test.com");
         member.setPassword("TestPassword");
         member.setNickname("Test User");
+        member.setMemberStatus(Member.MemberStatus.MEMBER_JOIN);
 
         return member;
     }
@@ -187,8 +187,9 @@ class ArticleServiceTest {
     }
 
     private ArticleDto createArticleDto(String title, String content, String hashtag) {
-        return ArticleDto.of(1L,
-                createUserAccountDto(),
+        return ArticleDto.of(
+                1L,
+                memberMapper.memberToMemberResponseDto(createUserAccount()),
                 title,
                 content,
                 hashtag,
@@ -196,10 +197,6 @@ class ArticleServiceTest {
                 "Uno",
                 LocalDateTime.now(),
                 "Uno");
-    }
-
-    private MemberDto.Response createUserAccountDto() {
-        return new MemberDto.Response(1L, "Test@test.com", "test User", 31, "male", "abc", Member.MemberStatus.MEMBER_JOIN, ZonedDateTime.now());
     }
 
 }
