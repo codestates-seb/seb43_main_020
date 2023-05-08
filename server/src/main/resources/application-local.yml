@@ -17,9 +17,9 @@ spring:
 #    driver-class-name: org.h2.Driver
 #    username: sa
 #    password:
-    url: jdbc:mysql://localhost:3306/community
-    username: root
-    password: 66356635
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   sql.init:
     mode: always
