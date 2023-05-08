@@ -4,11 +4,15 @@ import com.tdf.community.article.entity.Article;
 import com.tdf.community.member.dto.MemberDto;
 import com.tdf.community.member.mapper.MemberMapper;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.mapstruct.factory.Mappers;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
+@NoArgsConstructor
 public class ArticleDto {
     private Long id;
     private MemberDto.Response memberDto;

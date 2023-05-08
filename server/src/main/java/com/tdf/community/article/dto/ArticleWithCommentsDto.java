@@ -3,7 +3,9 @@ package com.tdf.community.article.dto;
 import com.tdf.community.article.entity.Article;
 import com.tdf.community.comment.dto.ArticleCommentDto;
 import com.tdf.community.member.dto.MemberDto;
+import com.tdf.community.member.mapper.MemberMapper;
 import lombok.Getter;
+import org.mapstruct.factory.Mappers;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
@@ -23,6 +25,8 @@ public class ArticleWithCommentsDto {
     private LocalDateTime modifiedAt;
     private String modifiedBy;
 
+    private static final MemberMapper memberMapper = Mappers.getMapper(MemberMapper.class);
+
     private ArticleWithCommentsDto(Long id, MemberDto.Response memberDto, Set<ArticleCommentDto> articleCommentDtos, String title, String content, String hashtag, LocalDateTime createdAt, String createdBy, LocalDateTime modifiedAt, String modifiedBy) {
         this.id = id;
         this.memberDto = memberDto;
@@ -40,10 +44,10 @@ public class ArticleWithCommentsDto {
         return new ArticleWithCommentsDto(id, memberDto, articleCommentDtos, title, content, hashtag, createdAt, createdBy, modifiedAt, modifiedBy);
     }
 
-    public static ArticleWithCommentsDto from(Article entity, MemberDto.Response memberDto) {
+    public static ArticleWithCommentsDto from(Article entity) {
         return new ArticleWithCommentsDto(
                 entity.getId(),
-                memberDto,
+                memberMapper.memberToMemberResponseDto(entity.getMember()),
                 entity.getArticleComments().stream()
                         .map(ArticleCommentDto::from)
                         .collect(Collectors.toCollection(LinkedHashSet::new)),
