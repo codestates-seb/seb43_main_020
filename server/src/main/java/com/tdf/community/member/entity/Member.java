@@ -43,7 +43,7 @@ public class Member {
 
     @Enumerated(value = EnumType.STRING)
     @Column(length =20,nullable = false)
-    private MemberStatus memberStatus =MemberStatus.MEMBER_JOIN;
+    private MemberStatus memberStatus = MemberStatus.MEMBER_JOIN;
 
     @OrderBy("createdAt DESC")
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)

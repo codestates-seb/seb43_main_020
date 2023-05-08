@@ -85,8 +85,8 @@ public class MemberDto {
 
   //    private LocalDateTime deleted_At
 
-        public String getMemberStatus() {
-            return memberStatus.getStatus();
+        public Member.MemberStatus getMemberStatus() {
+            return memberStatus;
         }
 
 
