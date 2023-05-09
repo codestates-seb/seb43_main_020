@@ -9,11 +9,9 @@ import com.tdf.community.member.mapper.MemberMapper;
 import com.tdf.community.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.data.web.SortDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +26,7 @@ public class ArticleController {
     private final MemberMapper memberMapper;
 
     @GetMapping("/")
-    public ResponseEntity<Page<ArticleDto>> searchArticles(
+    public ResponseEntity<Page<ArticleDto>> getArticles(
             @PageableDefault(size = 20, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable)
     {
         Page<ArticleDto> articles = articleService.getArticles(pageable);
@@ -52,14 +50,14 @@ public class ArticleController {
     }
 
     @PostMapping("/{memberId}")
-    public ResponseEntity<ArticleDto> createArticle(@RequestBody ArticleDto dto, @PathVariable Long memberId) {
+    public ResponseEntity<Void> createArticle(@RequestBody ArticleDto dto, @PathVariable Long memberId) {
         MemberDto.Response member = memberMapper.memberToMemberResponseDto(memberService.findMember(memberId));
         dto.setMemberDto(member);
         articleService.saveArticle(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PutMapping("/{articleId}")
+    @PatchMapping("/{articleId}")
     public ResponseEntity<Void> updateArticle(@PathVariable Long articleId, @RequestBody ArticleDto dto) {
         dto.setId(articleId);
         articleService.updateArticle(dto);
