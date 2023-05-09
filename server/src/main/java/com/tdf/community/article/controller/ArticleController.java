@@ -28,7 +28,7 @@ public class ArticleController {
     private final MemberMapper memberMapper;
 
     @GetMapping("/")
-    public ResponseEntity<Page<ArticleDto>> searchArticles(
+    public ResponseEntity<Page<ArticleDto>> getArticles(
             @PageableDefault(size = 20, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable)
     {
         Page<ArticleDto> articles = articleService.getArticles(pageable);
@@ -52,14 +52,14 @@ public class ArticleController {
     }
 
     @PostMapping("/{memberId}")
-    public ResponseEntity<ArticleDto> createArticle(@RequestBody ArticleDto dto, @PathVariable Long memberId) {
+    public ResponseEntity<Void> createArticle(@RequestBody ArticleDto dto, @PathVariable Long memberId) {
         MemberDto.Response member = memberMapper.memberToMemberResponseDto(memberService.findMember(memberId));
         dto.setMemberDto(member);
         articleService.saveArticle(dto);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PutMapping("/{articleId}")
+    @PatchMapping("/{articleId}")
     public ResponseEntity<Void> updateArticle(@PathVariable Long articleId, @RequestBody ArticleDto dto) {
         dto.setId(articleId);
         articleService.updateArticle(dto);
