@@ -8,7 +8,7 @@ import com.tdf.community.comment.repository.ArticleCommentRepository;
 import com.tdf.community.member.dto.MemberDto;
 import com.tdf.community.member.entity.Member;
 import com.tdf.community.member.mapper.MemberMapper;
-import com.tdf.community.member.mapper.MemberMapperImpl;
+import com.tdf.community.member.repository.MemberRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +32,7 @@ class ArticleCommentServiceTest {
     @InjectMocks private ArticleCommentService sut;
     @Mock private ArticleRepository articleRepository;
     @Mock private ArticleCommentRepository articleCommentRepository;
+    @Mock private MemberRepository memberRepository;
     private MemberMapper memberMapper = Mappers.getMapper(MemberMapper.class);
 
     @DisplayName("게시글 ID로 조회하면, 해당하는 댓글 리스트를 반환한다.")
@@ -58,6 +59,7 @@ class ArticleCommentServiceTest {
         // Given
         ArticleCommentDto dto = createArticleCommentDto("댓글");
         given(articleRepository.getReferenceById(dto.getArticleId())).willReturn(createArticle());
+        given(memberRepository.getReferenceById(dto.getMember().getMemberId())).willReturn(createUserAccount());
         given(articleCommentRepository.save(any(ArticleComment.class))).willReturn(null);
 
         // When
@@ -65,6 +67,7 @@ class ArticleCommentServiceTest {
 
         // Then
         then(articleRepository).should().getReferenceById(dto.getArticleId());
+        then(memberRepository).should().getReferenceById(dto.getMember().getMemberId());
         then(articleCommentRepository).should().save(any(ArticleComment.class));
     }
 
