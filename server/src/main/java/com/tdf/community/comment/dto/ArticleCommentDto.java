@@ -3,14 +3,19 @@ package com.tdf.community.comment.dto;
 import com.tdf.community.article.entity.Article;
 import com.tdf.community.comment.entity.ArticleComment;
 import com.tdf.community.member.dto.MemberDto;
+import com.tdf.community.member.entity.Member;
 import com.tdf.community.member.mapper.MemberMapper;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.mapstruct.factory.Mappers;
 
 import java.time.LocalDateTime;
 
 
 @Getter
+@Setter
+@NoArgsConstructor
 public class ArticleCommentDto {
     private Long id;
     private Long articleId;
@@ -34,6 +39,10 @@ public class ArticleCommentDto {
         this.modifiedBy = modifiedBy;
     }
 
+    public static ArticleCommentDto of(Long articleId, MemberDto.Response member, String content) {
+        return new ArticleCommentDto(null, articleId, member, content, null, null, null, null);
+    }
+
     public static ArticleCommentDto of(Long id, Long articleId, MemberDto.Response member, String content, LocalDateTime createdAt, String createdBy, LocalDateTime modifiedAt, String modifiedBy) {
         return new ArticleCommentDto(id, articleId, member, content, createdAt, createdBy, modifiedAt, modifiedBy);
     }
@@ -51,10 +60,10 @@ public class ArticleCommentDto {
         );
     }
 
-    public ArticleComment toEntity(Article entity) {
+    public ArticleComment toEntity(Article entity, Member member) {
         return ArticleComment.of(
                 entity,
-                memberMapper.memberResponseDtoToMember(this.member),
+                member,
                 content
         );
     }
