@@ -31,8 +31,6 @@ public class ArticleService {
 
     @Transactional(readOnly = true)
     public Page<ArticleDto> searchArticles(SearchType searchType, String searchKeyword, Pageable pageable) {
-        System.out.println(searchType);
-        System.out.println(searchKeyword);
         if(searchKeyword == null || searchKeyword.isBlank()) {
             return articleRepository.findAll(pageable).map(ArticleDto::from);
         }
