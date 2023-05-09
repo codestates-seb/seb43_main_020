@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -123,7 +124,7 @@ public class RestDocsMemberTest {
         String content = gson.toJson(patch);
 
         MemberDto.Response responseDto =
-                new MemberDto.Response(1L,"dmswjd4015@gmail.com","뎡이",20,"여성","서울시구로구개봉동",Member.MemberStatus.MEMBER_JOIN,LocalDateTime.now());
+                new MemberDto.Response(1L, "dmswjd4015@gmail.com", "뎡이", 20, "여성", "서울시구로구개봉동", Member.MemberStatus.MEMBER_JOIN, ZonedDateTime.now());
 
         given(mapper.memberPatchDtoToMember(Mockito.any(MemberDto.Patch.class))).willReturn(new Member());
 
@@ -189,9 +190,9 @@ public class RestDocsMemberTest {
     public void getMemberTest() throws Exception {
         Long memberId= 1L;
         //given
-        MemberDto.Response response= new MemberDto.Response(1L,
-                "dmswjd4015@naver.com","서은정",20,"여성",
-                "서울시구로구",Member.MemberStatus.MEMBER_JOIN,LocalDateTime.now());
+        MemberDto.Response response = new MemberDto.Response(1L,
+                "dmswjd4015@naver.com", "서은정", 20, "여성",
+                "서울시구로구", Member.MemberStatus.MEMBER_JOIN, ZonedDateTime.now());
 
         given(memberService.findMember(Mockito.anyLong())).willReturn(new Member());
         given(mapper.memberToMemberResponseDto(Mockito.any(Member.class))).willReturn(response);
