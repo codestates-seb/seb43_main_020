@@ -2,29 +2,32 @@ package com.tdf.community.member.service;
 
 import com.tdf.community.member.entity.Member;
 import com.tdf.community.member.repository.MemberRepository;
-import com.tdf.community.profile.ImageService;
+import com.tdf.community.profile.AwsS3Service;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @Service
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final ImageService imageService;
+    private final AwsS3Service awsS3Service;
 
-    public MemberService(MemberRepository memberRepository, ImageService imageService) {
+    public MemberService(MemberRepository memberRepository, AwsS3Service awsS3Service) {
         this.memberRepository = memberRepository;
-        this.imageService = imageService;
+        this.awsS3Service = awsS3Service;
     }
 
-    public Member createMember(Member member, MultipartFile profileImage) {
-        member.setProfileImageName(profileImage.getOriginalFilename());
-        imageService.store(profileImage);
+    public Member createMember(Member member, MultipartFile profileImage) throws IOException {
+        awsS3Service.upload(profileImage,"profileImage");
+        member.setProfileImageURL(awsS3Service.upload(profileImage,"profileImage"));
+
+
         Member createdMember =memberRepository.save(member);
         return createdMember;
     }
@@ -58,6 +61,7 @@ public class MemberService {
     }
 
     public void adminDeleteMember(long memberId) {
+
         memberRepository.deleteById(memberId);
     }
 

@@ -6,7 +6,8 @@ public class ImageException extends RuntimeException{
         super(message);
     }
 
-    public ImageException(String message,Throwable cause){
+    public ImageException(String message,Throwable cause)
+    {
         super(message,cause);
     }
 }

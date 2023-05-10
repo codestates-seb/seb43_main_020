@@ -39,19 +39,19 @@ public class Member {
 
     private String address;
 
-    private String profileImageName;
+    private String profileImageURL;
 
     @Enumerated(value = EnumType.STRING)
     @Column(length =20,nullable = false)
     private MemberStatus memberStatus =MemberStatus.MEMBER_JOIN;
 
-    @OrderBy("createdAt DESC")
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<Article> articles = new ArrayList<>();
-
-    @OrderBy("createdAt DESC")
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<ArticleComment> articleComments = new ArrayList<>();
+//    @OrderBy("createdAt DESC")
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+//    private List<Article> articles = new ArrayList<>();
+//
+//    @OrderBy("createdAt DESC")
+//    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+//    private List<ArticleComment> articleComments = new ArrayList<>();
 
 //    private List<String> roles = new ArrayList<>();
 

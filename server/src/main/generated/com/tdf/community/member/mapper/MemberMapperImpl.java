@@ -17,8 +17,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-05-05T20:06:51+0900",
-    comments = "version: 1.5.1.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.1.jar, environment: Java 11.0.17 (Azul Systems, Inc.)"
+    date = "2023-05-11T00:03:10+0900",
+    comments = "version: 1.5.1.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-7.6.1.jar, environment: Java 11.0.18 (Eclipse Adoptium)"
 )
 @Component
 public class MemberMapperImpl implements MemberMapper {
@@ -83,6 +83,7 @@ public class MemberMapperImpl implements MemberMapper {
         int age = 0;
         String gender = null;
         String address = null;
+        String profileImageURL = null;
         Member.MemberStatus memberStatus = null;
         LocalDateTime created_At = null;
 
@@ -92,10 +93,11 @@ public class MemberMapperImpl implements MemberMapper {
         age = member.getAge();
         gender = member.getGender();
         address = member.getAddress();
+        profileImageURL = member.getProfileImageURL();
         memberStatus = member.getMemberStatus();
         created_At = xmlGregorianCalendarToLocalDateTime( zonedDateTimeToXmlGregorianCalendar( member.getCreated_At() ) );
 
-        MemberDto.Response response = new MemberDto.Response( memberId, email, nickname, age, gender, address, memberStatus, created_At );
+        MemberDto.Response response = new MemberDto.Response( memberId, email, nickname, age, gender, address, profileImageURL, memberStatus, created_At );
 
         return response;
     }

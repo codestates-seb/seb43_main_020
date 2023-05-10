@@ -16,6 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
+import java.io.IOException;
 import java.net.URI;
 import java.util.List;
 
@@ -35,7 +36,7 @@ public class MemberController {
 
     @PostMapping(value = "/join",consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity postMember(@Valid @RequestPart MemberDto.Post requestBody,
-                                     @RequestPart MultipartFile profileImage){
+                                     @RequestPart MultipartFile profileImage) throws IOException {
 
         Member createdMember=memberService.createMember(mapper.memberPostDtoToMember(requestBody),profileImage);
         URI location= UriComponentsBuilder.newInstance()

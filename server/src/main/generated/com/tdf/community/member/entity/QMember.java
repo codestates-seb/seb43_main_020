@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
-import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -24,10 +23,6 @@ public class QMember extends EntityPathBase<Member> {
 
     public final NumberPath<Integer> age = createNumber("age", Integer.class);
 
-    public final ListPath<com.tdf.community.comment.entity.ArticleComment, com.tdf.community.comment.entity.QArticleComment> articleComments = this.<com.tdf.community.comment.entity.ArticleComment, com.tdf.community.comment.entity.QArticleComment>createList("articleComments", com.tdf.community.comment.entity.ArticleComment.class, com.tdf.community.comment.entity.QArticleComment.class, PathInits.DIRECT2);
-
-    public final ListPath<com.tdf.community.article.entity.Article, com.tdf.community.article.entity.QArticle> articles = this.<com.tdf.community.article.entity.Article, com.tdf.community.article.entity.QArticle>createList("articles", com.tdf.community.article.entity.Article.class, com.tdf.community.article.entity.QArticle.class, PathInits.DIRECT2);
-
     public final DateTimePath<java.time.ZonedDateTime> created_At = createDateTime("created_At", java.time.ZonedDateTime.class);
 
     public final StringPath email = createString("email");
@@ -42,7 +37,7 @@ public class QMember extends EntityPathBase<Member> {
 
     public final StringPath password = createString("password");
 
-    public final StringPath profileImageName = createString("profileImageName");
+    public final StringPath profileImageURL = createString("profileImageURL");
 
     public QMember(String variable) {
         super(Member.class, forVariable(variable));

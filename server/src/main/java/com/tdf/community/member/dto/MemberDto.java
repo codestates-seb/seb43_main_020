@@ -78,6 +78,9 @@ public class MemberDto {
         private String gender;
 
         private String address;
+
+        private String profileImageURL;
+
         private Member.MemberStatus memberStatus;
 
         private LocalDateTime created_At;
