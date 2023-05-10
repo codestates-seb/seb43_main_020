@@ -1,7 +1,13 @@
 import { Outlet } from "react-router";
 import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
 import Pagination from "react-bootstrap/Pagination";
 import Number from "../components/Pagination";
+import { useEffect } from "react";
+
+
+
+
 function Writelist() {
   return (
     <>
@@ -32,6 +38,10 @@ function Writelist() {
           </tr>
         </tbody>
       </Table>
+      <Button variant="info">글쓰기</Button>
+      <Button variant="secondary">수정하기</Button>
+      <Button variant="danger">삭제하기</Button>
+
       <Number />
     </>
   );
