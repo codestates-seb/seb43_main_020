@@ -1,64 +1,23 @@
+import { Container, Nav, Navbar } from "react-bootstrap";
 import styled from "styled-components";
-import { CommonButton } from "./Buttons";
-import Search from "./Search";
 
-const HeaderContainer = styled.header`
-  width: 100%;
-  position: fixed;
-  z-index: 10;
-  height: 50px;
-  background-color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-bottom: 1px solid #d3d3d3;
-  margin-bottom: 10px;
-
-  .header-container {
-    width: 1264px;
-    max-width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .logo {
-      height: 100%;
-      margin: 0;
-      padding: 0 8px;
-      display: flex;
-      align-items: center;
-    }
-
-    .button-container {
-      display: flex;
-    }
-
-    .button-container button {
-      padding: 8px 10px;
-    }
-  }
-`;
-
-const Header = () => {
+function Header() {
   return (
-    <HeaderContainer>
-      <div className="header-container">
-        <h1 className="logo">logo</h1>
-        <Search />
-        <div className="button-container">
-          <CommonButton>Log in</CommonButton>
-          <CommonButton
-            bgColor="var(--blue-500)"
-            color="#fff"
-            border="transparent"
-          >
-            Sign up
-          </CommonButton>
-        </div>
-      </div>
-    </HeaderContainer>
+    <>
+      <Navbar bg="primary" variant="dark">
+        <Container>
+          <div className="bg">
+            <img src="/weather.jpg" width="100%" height="50px" />
+          </div>
+          <Navbar.Brand href="#home">오늘의 날씨</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="#alert">공지사항</Nav.Link>
+            <Nav.Link href="#alert">로그인</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+    </>
   );
-};
+}
 
 export default Header;
