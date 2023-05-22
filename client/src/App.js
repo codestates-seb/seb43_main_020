@@ -2,7 +2,8 @@ import { useState } from "react";
 import Header from "./components/Header";
 import styled from "styled-components";
 import axios from "axios";
-
+import Footer from "./components/Footer";
+import Animation from "./components/Animation";
 function App() {
   const API_KEY = "b5e6daa16ad773508276891721b6c4ba";
   const [location, setLocation] = useState("");
@@ -26,6 +27,7 @@ function App() {
   return (
     <>
       <Header />
+      <Animation />
       <AppWrap>
         <div className="appContentWrap">
           <input
@@ -48,6 +50,8 @@ function App() {
           )}
         </div>
       </AppWrap>
+
+      <Footer />
     </>
   );
 }
@@ -57,14 +61,14 @@ export default App;
 const AppWrap = styled.div`
   width: 100vw;
   height: 100vh;
-  border: 1px red solid;
+  
 
   .appContentWrap {
     left: 30%;
     top: 30%;
     transform translate(-30%,-30%)
     positon: aboulute;
-    border: 1px blue solid;
+ 
     padding: 300px;
   }
 `;
@@ -72,6 +76,6 @@ const AppWrap = styled.div`
 const ResultWrap = styled.div`
   margin-top: 50px;
   padding: 10px;
-  border: 1px black solid;
+
   border-radius: 8px;
 `;
