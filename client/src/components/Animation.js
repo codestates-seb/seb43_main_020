@@ -1,41 +1,57 @@
-import Carousel from "react-bootstrap/Carousel";
+import React, { useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import "./styles.css";
+
+import { EffectCoverflow, Pagination, Navigation, Autoplay } from "swiper";
 
 function Animation() {
   return (
-    <Carousel>
-      <Carousel.Item interval={1000}>
-        <img
-          className="d-block w-auto p-3"
-          src="/weather1.jpg"
-          alt="First slide"
-        />
-        <Carousel.Caption></Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item interval={500}>
-        <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=Second slide&bg=282c34"
-          alt="Second slide"
-        />
-        <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="holder.js/800x400?text=Second slide&bg=282c34"
-          alt="Second slide"
-        />
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
-    </Carousel>
+    <>
+      <Swiper
+        spaceBetween={30}
+        autoplay={{
+          delay: 1000,
+          disableOnInteraction: false,
+        }}
+        pagination={{
+          clickable: true,
+        }}
+        effect={"coverflow"}
+        grabCursor={true}
+        centeredSlides={true}
+        loop={true}
+        slidesPerView={"auto"}
+        coverflowEffect={{
+          rotate: 0,
+          stretch: 0,
+          depth: 100,
+          modifier: 2.5,
+        }}
+        navigation={true}
+        modules={[Autoplay, EffectCoverflow, Pagination]}
+        className="mySwiper"
+      >
+        <SwiperSlide>
+          <img src="/weather1.jpg" alt="slide_image" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="/weather2.JPG" alt="slide_image" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="/weather3.JPG" alt="slide_image" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="/weather4.jpg" alt="slide_image" />
+        </SwiperSlide>
+        <SwiperSlide>
+          <img src="/weather5.JPG" alt="slide_image" />
+        </SwiperSlide>
+      </Swiper>
+    </>
   );
 }
 
