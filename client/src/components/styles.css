@@ -16,3 +16,9 @@
   display: block;
   width: 100%;
 }
+
+.FooterCard {
+  margin: 8px 0px 8px 0px;
+  line-height: 70%;
+  text-align: center;
+}
