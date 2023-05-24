@@ -1,0 +1,37 @@
+{
+  "coord": { "lon": 126.9778, "lat": 37.5683 },
+  "weather": [
+    {
+      "id": 501,
+      "main": "Rain",
+      "description": "moderate rain",
+      "icon": "10d"
+    },
+    { "id": 701, "main": "Mist", "description": "mist", "icon": "50d" }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 295.28,
+    "feels_like": 295.4,
+    "temp_min": 293.81,
+    "temp_max": 296.91,
+    "pressure": 1010,
+    "humidity": 71
+  },
+  "visibility": 10000,
+  "wind": { "speed": 4.12, "deg": 270 },
+  "rain": { "1h": 1 },
+  "clouds": { "all": 100 },
+  "dt": 1684387746,
+  "sys": {
+    "type": 1,
+    "id": 8105,
+    "country": "KR",
+    "sunrise": 1684354865,
+    "sunset": 1684406167
+  },
+  "timezone": 32400,
+  "id": 1835848,
+  "name": "Seoul",
+  "cod": 200
+}

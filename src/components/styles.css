@@ -1,0 +1,33 @@
+.swiper {
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  --swiper-theme-color: #fff;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 500px;
+  height: 300px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+}
+
+.FooterCard {
+  margin: 8px 0px 8px 0px;
+  line-height: 50%;
+  text-align: center;
+}
+
+.Iconsbg {
+  height: 30px;
+}
+
+.icons {
+  padding: 10px;
+  font-size: 30px;
+}
