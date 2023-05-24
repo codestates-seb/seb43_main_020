@@ -29,25 +29,40 @@ function App() {
     <>
       <Header />
       <Animation />
-      <AppWrap>
+      <AppWrap style={{ background: "url(/F.jpg)" }}>
         <div className="appContentWrap">
-          <div className="inputcenter">
-            <input
-              className="inputbox"
-              placeholder="지역을 입력하세요"
-              value={location}
-              onChange={(e) => {
-                setLocation(e.target.value);
-              }}
-              type="text"
-              onKeyDown={searchWeather}
-            />
-          </div>
+          <input
+            style={{
+              width: "800px",
+              height: "50px",
+              textAlign: "center",
+              borderRadius: "10px",
+              background: "url(/Atlas.jpg)",
+            }}
+            className="inputbox"
+            placeholder="지역을 입력하세요"
+            value={location}
+            onChange={(e) => {
+              setLocation(e.target.value);
+            }}
+            type="text"
+            onKeyDown={searchWeather}
+          />
+
           {Object.keys(result).length !== 0 && (
             <ResultWrap>
               <div className="city">{result.data.name}</div>
               <div className="temperature">
                 {Math.round((result.data.main.temp - 273.15) * 10) / 10}°C
+              </div>
+              <div>
+                <img
+                  src={
+                    "https://openweathermap.org/img/wn/" +
+                    result.data.weather[0].icon +
+                    "@2x.png"
+                  }
+                />
               </div>
               <div className="sky">{result.data.weather[0].main}</div>
             </ResultWrap>
@@ -62,47 +77,22 @@ function App() {
 
 export default App;
 
-function Sunny() {
-  return (
-    <div>
-      <img src="sunny.png"></img>
-    </div>
-  );
-}
-function Rain() {
-  return (
-    <div>
-      <img src="rain.png"></img>
-    </div>
-  );
-}
-function Snow() {
-  return (
-    <div>
-      <img src="snow.png"></img>
-    </div>
-  );
-}
-function Cloud() {
-  return (
-    <div>
-      <img src="cloud.png"></img>
-    </div>
-  );
-}
-
 const AppWrap = styled.div`
   width: 100vw;
   height: 60vh;
   
   .inputbox{
-    border: none; 
-    background: transparent;
-    text-align:center;
+    border: "red 1px solid", 
+    width: "800px",
+    height: "50px",
+    text-align:"center",
+    background-color:"red"
   }
   .inputcenter{
-    margin-left:670px;
+   margin-left:380px;
     position:absolute;
+    border-radius: 8px;
+
   }
 
   .appContentWrap {
@@ -110,20 +100,16 @@ const AppWrap = styled.div`
     top: 50%;
     transform: translate(-50%, -50%)
     position: absolute;
-    
     padding: 200px;
     text-align:center;
-    background:url(./Maldives.jpg)
-    
+    padding:50px;
   }
 `;
 
 const ResultWrap = styled.div`
   margin-top: 50px;
   padding: 10px;
-
   border-radius: 8px;
-
   .city {
     font-size: 24px;
   }
