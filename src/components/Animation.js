@@ -11,7 +11,7 @@ import { EffectCoverflow, Pagination, Navigation, Autoplay } from "swiper";
 function Animation() {
   return (
     <Swiper
-      style={{ background: "url(/F.jpg)" }}
+      // style={{ background: "url(/F.jpg)" }}
       spaceBetween={30}
       autoplay={{
         delay: 1000,
