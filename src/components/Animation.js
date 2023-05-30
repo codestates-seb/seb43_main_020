@@ -17,9 +17,6 @@ function Animation() {
         delay: 1000,
         disableOnInteraction: false,
       }}
-      pagination={{
-        clickable: true,
-      }}
       effect={"coverflow"}
       grabCursor={true}
       centeredSlides={true}
@@ -28,8 +25,11 @@ function Animation() {
       coverflowEffect={{
         rotate: 0,
         stretch: 0,
-        depth: 100,
-        modifier: 2.5,
+        depth: 50,
+        modifier: 2.0,
+      }}
+      pagination={{
+        clickable: true,
       }}
       navigation={true}
       modules={[Autoplay, EffectCoverflow, Pagination]}
