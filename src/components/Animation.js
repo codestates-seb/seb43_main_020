@@ -28,7 +28,6 @@ function Animation() {
         depth: 50,
         modifier: 2.0,
       }}
-      navigation={true}
       modules={[Autoplay, EffectCoverflow, Pagination]}
       className="mySwiper"
       pagination={{
