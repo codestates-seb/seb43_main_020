@@ -28,12 +28,12 @@ function Animation() {
         depth: 50,
         modifier: 2.0,
       }}
-      pagination={{
-        clickable: true,
-      }}
       navigation={true}
       modules={[Autoplay, EffectCoverflow, Pagination]}
       className="mySwiper"
+      pagination={{
+        clickable: true,
+      }}
     >
       <SwiperSlide>
         <img src="/weather1.jpg" alt="slide_image" />
